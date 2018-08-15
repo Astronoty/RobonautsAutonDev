@@ -1,0 +1,5 @@
+﻿  BezierMain.cpp
+  Bezier.cpp
+c:\users\daniel\documents\visual studio projects\bezier\bezier\bezier.cpp(18): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Bezier.vcxproj -> C:\Users\Daniel\Documents\Visual Studio Projects\Bezier\Debug\Bezier.exe
