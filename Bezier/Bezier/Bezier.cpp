@@ -9,26 +9,98 @@ Bezier::Bezier(int degree)
 {
 }
 
-Bezier::Bezier(vector<double> *x, vector<double> *y, int degree)
+//Constructor for standard bezier that takes N degree and N+1 points for both x and y
+Bezier::Bezier(vector<double> &x, vector<double> &y, int degree)
 	: degree(degree)
 {
-	//Need to check if sizes line up
-	ctrlPoints.reserve(2);
-
-	for (int i = 0; i < x->size(); x++)
+	//Check if degree and points are consistent
+	if (x.size() == degree + 1)
 	{
-		ctrlPoints[0].push_back(x->at(i));
-		ctrlPoints[1].push_back(y->at(i));
+		setBernsteinBasis(degree);
+
+		xPoints.reserve(degree);
+		yPoints.reserve(degree);
+
+		vector<double> temp;
+
+		for (uint16_t i = 0; i < x.size(); i++)
+		{
+			temp = { x.at(i) };
+			xPoints.push_back(temp);
+
+			temp = { y.at(i) };
+			yPoints.push_back(temp);
+		}
+
+		temp = {};
+		tMatrix.push_back(temp);
+
 	}
+	else
+		cout << "INVALID: MIXMATCH BETWEEN DEGREE AND POINTS";
 
 }
 
 Bezier::~Bezier()
 {
 	degree = NULL;
-	ctrlPoints.clear();
+	xPoints.clear();
+	yPoints.clear();
+	bernsteinBasis.clear();
+	tMatrix.clear();
 }
 
+void Bezier::setBernsteinBasis(int degree)
+{
+	//Select the right basis matrix based on degree
+	switch (degree)
+	{
+		case 1: 
+			break;
+	
+		case 2:
+			break;
+		case 3: bernsteinBasis = 
+			{
+			{ 1, 0, 0, 0 },
+			{ -3, 3, 0, 0 },
+			{ 3, -6, 3, 0 },
+			{ 1, 3, -3, 1 }
+			};
+			break;
+
+		default:
+			break;
+
+
+	}
+}
+//Calculate (x,y) point based on t (val from 0-1)
+vector<double> Bezier::calculateBezierPoint(double t)
+{
+	//Return this vector, resultant will be tMatrix*bernsteinBasis*parameterizedPoints
+	vector<double> points;
+	
+
+	tMatrix[0].clear();
+	//Calculate the tMatrix
+	for (int i = 0; i <= degree; i++)
+	{
+		tMatrix[0].push_back(pow(t,i));
+	}
+	
+	//This equals tMatrix*bernsteinBasis
+	vector<vector<double>> intermediateResultant = multiply(tMatrix, bernsteinBasis);
+
+	//These store the resultants after multiplying by the x and y control points
+	vector<vector<double>> resultantX = multiply(intermediateResultant, xPoints);
+	vector<vector<double>> resultantY = multiply(intermediateResultant, yPoints);
+
+	points.push_back(resultantX[0][0]);
+	points.push_back(resultantY[0][0]);
+
+	return points;
+}
 //Recursive factorial
 int Bezier::factorial(int n)
 {
@@ -107,6 +179,8 @@ void Bezier::printMatrix(vector<vector<double>> &a)
 		cout << "]" << endl;
 
 	}
+
+	cout << endl;
 
 }
 
