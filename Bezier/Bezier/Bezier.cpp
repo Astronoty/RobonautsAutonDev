@@ -10,12 +10,10 @@ Bezier::Bezier(int degree)
 }
 
 //Constructor for standard bezier that takes N degree and N+1 points for both x and y
-Bezier::Bezier(vector<double> &x, vector<double> &y, int degree)
-	: degree(degree)
+Bezier::Bezier(vector<double> &x, vector<double> &y)
 {
-	//Check if degree and points are consistent
-	if (x.size() == degree + 1)
-	{
+	degree = x.size() - 1;
+
 		setBernsteinBasis(degree);
 
 		xPoints.reserve(degree);
@@ -34,11 +32,6 @@ Bezier::Bezier(vector<double> &x, vector<double> &y, int degree)
 
 		temp = {};
 		tMatrix.push_back(temp);
-
-	}
-	else
-		cout << "INVALID: MIXMATCH BETWEEN DEGREE AND POINTS";
-
 }
 
 Bezier::~Bezier()
@@ -55,20 +48,46 @@ void Bezier::setBernsteinBasis(int degree)
 	//Select the right basis matrix based on degree
 	switch (degree)
 	{
-		case 1: 
+		case 1: bernsteinBasis = 
+			{
+			{ 1, 0},
+			{-1, 1}
+			};
 			break;
 	
-		case 2:
+		case 2: bernsteinBasis = 
+			{
+			{ 1, 0, 0},
+			{-2, 2, 0},
+			{ 1,-2, 1}
+			};
 			break;
 		case 3: bernsteinBasis = 
 			{
 			{ 1, 0, 0, 0 },
-			{ -3, 3, 0, 0 },
-			{ 3, -6, 3, 0 },
-			{ 1, 3, -3, 1 }
+			{-3, 3, 0, 0 },
+			{ 3,-6, 3, 0 },
+			{-1, 3,-3, 1 }
 			};
 			break;
-
+		case 4: bernsteinBasis = 
+			{
+			{ 1, 0,  0,  0, 0},
+			{-4, 4,  0,  0, 0},
+			{ 6,-12, 6,  0, 0},
+			{-4, 12,-12, 4, 0},
+			{ 1,-4,  6, -4, 1}
+			};
+			break;
+		case 5: bernsteinBasis = 
+			{
+			{ 1,  0,  0,  0,  0, 0},
+			{-5,  5,  0,  0,  0, 0},
+			{ 10,-20, 10, 0,  0 ,0},
+			{-10, 30,-30, 10, 0, 0},
+			{ 5, -20, 30,-20, 5, 0},
+			{-1,  5, -10, 10,-5, 1}
+			};
 		default:
 			break;
 
@@ -116,7 +135,7 @@ int Bezier::binomial(int n, int k)
 	//Stores an initial pascal to decrease processing time for low level combination calls
 	int pascal[7][7] =
 	{
-		{ 1, },           // n=0
+	{ 1 },           // n=0
 	{ 1, 1 },          // n=1
 	{ 1, 2, 1 },         // n=2
 	{ 1, 3, 3, 1 },        // n=3
