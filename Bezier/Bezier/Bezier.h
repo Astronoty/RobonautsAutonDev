@@ -6,7 +6,6 @@ using namespace std;
 class Bezier
 {
 public:
-	Bezier(int degree); //Instantiates a Bezier of degree deg
 	Bezier(vector<double> &x, vector<double> &y); //Instantiates a Bezier of degree deg with (x,y) control points
 	~Bezier();
 

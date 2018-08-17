@@ -4,11 +4,6 @@
 
 using namespace std;
 
-Bezier::Bezier(int degree)
-	:degree(degree)
-{
-}
-
 //Constructor for standard bezier that takes N degree and N+1 points for both x and y
 Bezier::Bezier(vector<double> &x, vector<double> &y)
 {
