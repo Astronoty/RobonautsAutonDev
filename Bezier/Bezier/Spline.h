@@ -4,10 +4,11 @@
 
 using namespace std;
 
-class Spline {
+class Spline 
+{
 
 	/*The wrapper class for a list of Bezier curves
-	Functionality includes: 
+	Functionality includes:
 	1st derivative checking at intersection points
 	2nd derivative checking at intersection points
 	Manipulation of points while maintaining localism*/
