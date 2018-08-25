@@ -27,7 +27,7 @@
     <ClInclude Include="CSVWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Spline.h">
+    <ClInclude Include="BezierSpline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="Bezier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Spline.cpp">
+    <ClCompile Include="BezierSpline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

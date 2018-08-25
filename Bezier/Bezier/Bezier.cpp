@@ -4,6 +4,12 @@
 
 using namespace std;
 
+//Placeholder
+Bezier::Bezier()
+{
+
+}
+
 //Constructor for standard bezier that takes N degree and N+1 points for both x and y
 Bezier::Bezier(vector<double> &x, vector<double> &y)
 {
@@ -94,7 +100,6 @@ vector<double> Bezier::calculateBezierPoint(double t)
 {
 	//Return this vector, resultant will be tMatrix*bernsteinBasis*parameterizedPoints
 	vector<double> points;
-	
 
 	tMatrix[0].clear();
 	//Calculate the tMatrix
