@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<macro name= "Driving Test program">
+	<connect type="head" step="preAuton"/>
+	<connect type="abort" step="preAuton"/>
+
+	<step type="MSWait" ctrl_name= "gen" name="preAuton" time="0.01">
+		<connect type="next" step="bezier"/>
+	</step>
+	
+	<step type="MSDriveBezier" ctrl_name="drive" name="bezier" speed="75" tolerance="1" accel_percent="0.2" decel_percent="0.0" adjust_heading="true" adjust_heading_end="0.95">
+		<way x="0" y="0" theta="0" />
+    <way x="100" y="100" theta="0" />
+    <way x="200" y="100" theta="0" />
+    <way x="300" y="0" theta="0" />
+		<connect type="next" step="segment2"/>
+	</step>
+</macro>
