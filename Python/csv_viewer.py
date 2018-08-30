@@ -14,11 +14,11 @@ y_names = []
 try:
   opts, args = getopt.getopt(sys.argv[1:], 'hf:p:t:x:y:', ['help', 'file', 'plot-type', 'title'])
 except getopt.GetoptError:
-  print('csv_viewer.py -f <input_csv> -t <title> -p <plot_type> -x <x_variable> -y <y_variables>')
+  print('csv_viewer.py -f <input_csv> [-t <title> -p <plot_type> -x <x_variable> -y <y_variables>]')
   sys.exit(2)
 for opt, arg, in opts:
   if opt in ('-h', '--help'):
-    print('csv_viewer.py -f <input_csv> -t <title> -p <plot_type> -x <x_variable> -y <y_variables>')
+    print('csv_viewer.py -f <input_csv> [-t <title> -p <plot_type> -x <x_variable> -y <y_variables>]')
     sys.exit()
   elif opt in ('-f', '--file'):
     filename = arg
