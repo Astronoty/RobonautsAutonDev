@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<macro name= "Driving Test program">
+	<connect type="head" step="preAuton"/>
+	<connect type="abort" step="preAuton"/>
+
+	<step type="MSWait" ctrl_name= "gen" name="preAuton" time="0.01">
+		<connect type="next" step="line_3"/>
+	</step>
+	
+	<step type="MSDriveSegment" ctrl_name="drive" name="segment" speed="75" tolerance="1" accel_percent="0.2" decel_percent="0.0" adjust_heading="true" adjust_heading_end="0.95">
+		<seg distance="-175" init_heading=  "0" final_heading="0" />
+		<seg distance="-60" init_heading=  "0" final_heading=  "90" />
+		<seg distance="-175" init_heading=  "90" final_heading=  "90" />
+		<seg distance="-15" init_heading=  "90" final_heading=  "-25" />
+		<_seg distance="-40" init_heading=  "-25" final_heading=  "-25" />
+		<connect type="next" step="segment2"/>
+	</step>
+
+	<step type="MSDriveSegment" ctrl_name="drive" name="segment2" speed="60" tolerance="1" accel_percent="0.2" decel_percent="0.0" use_line_sensor="true" desired_line_sensor="1" lines_to_cross="1" >
+		<seg distance="-40" init_heading=  "-25" final_heading=  "-25" />
+	</step>
+
+	<!-- example line crossing -->
+	<step type="MSDriveSegment" ctrl_name="drive" name="line_3" speed="40" tolerance="1" accel_percent="0.2" decel_percent="0.0" use_line_sensor="true" desired_line_sensor="3" lines_to_cross="1" >
+		<seg distance="80" init_heading=  "0" final_heading=  "0" />
+		<connect type="next" step="line_0"/>
+	</step>
+
+	<step type="MSDriveSegment" ctrl_name="drive" name="line_0" speed="40" tolerance="1" accel_percent="0.2" decel_percent="0.0" use_line_sensor="true" desired_line_sensor="0" lines_to_cross="1" >
+		<seg distance="-80" init_heading=  "0" final_heading=  "0" />
+		<connect type="next" step="line_1"/>
+	</step>
+
+	<step type="MSDriveSegment" ctrl_name="drive" name="line_1" speed="40" tolerance="1" accel_percent="0.2" decel_percent="0.0" use_line_sensor="true" desired_line_sensor="1" lines_to_cross="1" >
+		<seg distance="80" init_heading=  "0" final_heading=  "0" />
+		<connect type="next" step="line_2"/>
+	</step>
+
+	<step type="MSDriveSegment" ctrl_name="drive" name="line_2" speed="40" tolerance="1" accel_percent="0.2" decel_percent="0.0" use_line_sensor="true" desired_line_sensor="2" lines_to_cross="1" >
+		<seg distance="-80" init_heading=  "0" final_heading=  "0" />
+		<_connect type="next" step="line_2"/>
+	</step>
+</macro>
